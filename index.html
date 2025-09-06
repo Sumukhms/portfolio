@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The personal portfolio of Sumukh M S, a full-stack developer with a passion for building creative and impactful web applications." />
   <title>Sumukh M S - Comic Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -24,6 +25,7 @@
         <a href="#projects" class="hover:text-yellow-400 transition-colors">Projects</a>
         <a href="#skills" class="hover:text-yellow-400 transition-colors">Skills</a>
         <a href="#certifications" class="hover:text-yellow-400 transition-colors">Certifications</a>
+        <a href="#chess" class="hover:text-yellow-400 transition-colors">Chess</a>
         <a href="#resume" class="hover:text-yellow-400 transition-colors">Resume</a>
         <a href="#contact" class="hover:text-yellow-400 transition-colors">Contact</a>
       </nav>
@@ -39,97 +41,64 @@
   </div>
 
   <div class="z-10 flex flex-col items-center">
-    <div class="float-animation">
+    <div class="avatar-container">
       <svg width="200" height="240" viewBox="0 0 200 250" class="avatar">
+        <title>Animated robot avatar</title>
         <g>
           <rect x="50" y="20" width="100" height="80" rx="15" fill="#4299e1" stroke="#FFF" stroke-width="4"/>
           <line x1="100" y1="20" x2="100" y2="0" stroke="#FFF" stroke-width="4"/>
           <circle cx="100" cy="0" r="8" fill="#e53e3e" stroke="#FFF" stroke-width="4"/>
-          <circle class="eye" cx="80" cy="55" r="12" fill="#fff" stroke="#000" stroke-width="3"/>
-          <circle class="eye" cx="120" cy="55" r="12" fill="#fff" stroke="#000" stroke-width="3"/>
-          <circle class="pupil" cx="82" cy="57" r="4" fill="#000"/>
-          <circle class="pupil" cx="122" cy="57" r="4" fill="#000"/>
+          <circle class="eye" id="eye-left" cx="80" cy="55" r="12" fill="#fff" stroke="#000" stroke-width="3"/>
+          <circle class="eye" id="eye-right" cx="120" cy="55" r="12" fill="#fff" stroke="#000" stroke-width="3"/>
+          <circle class="pupil" id="pupil-left" cx="80" cy="55" r="4" fill="#000"/>
+          <circle class="pupil" id="pupil-right" cx="120" cy="55" r="4" fill="#000"/>
           <path d="M 80 80 Q 100 90 120 80" stroke="#000" stroke-width="3" fill="none"/>
           <rect x="30" y="100" width="140" height="100" rx="15" fill="#4a5568" stroke="#FFF" stroke-width="4"/>
           <rect x="55" y="120" width="90" height="60" rx="5" fill="#a0aec0" stroke="#000" stroke-width="3"/>
           <path d="M 70 140 L 85 155 L 100 140 L 115 155 L 130 140" stroke="#2d3748" stroke-width="4" fill="none" stroke-linecap="round"/>
           <rect x="60" y="200" width="30" height="50" fill="#4299e1" stroke="#FFF" stroke-width="4"/>
           <rect x="110" y="200" width="30" height="50" fill="#4299e1" stroke="#FFF" stroke-width="4"/>
+          <rect x="0" y="105" width="25" height="70" rx="8" fill="#4299e1" stroke="#FFF" stroke-width="4"/>
+          <rect x="175" y="105" width="25" height="70" rx="8" fill="#4299e1" stroke="#FFF" stroke-width="4"/>
+          <circle cx="12" cy="115" r="5" fill="#a0aec0" stroke="#FFF" stroke-width="2"/>
+          <circle cx="188" cy="115" r="5" fill="#a0aec0" stroke="#FFF" stroke-width="2"/>
         </g>
       </svg>
     </div>
 
     <div class="speech-bubble animate-pop-in mt-6 p-6">
       <h2 class="text-4xl md:text-6xl text-red-500">WHOOSH! A VISITOR!</h2>
-      <p class="text-lg mt-2 text-gray-800">I'm <strong class="text-blue-500">Sumukh M S</strong></p>
-      <p id="typing-text" class="mt-2 text-md text-gray-700 font-mono"></p>
+      <p class="text-2xl mt-2 text-gray-800">I'm <strong class="text-blue-500">Sumukh M S</strong></p>
+      <p id="typing-text" class="mt-2 text-xl text-gray-700 font-mono"></p>
     </div>
-    <button id="start-tour-btn" class="comic-button-small bg-yellow-400 text-black py-3 px-8 text-xl mt-8 z-20">Start Tour!</button>
   </div>
 </section>
 
 <section id="about" class="py-20 bg-red-800 about-clipper section-container">
   <div class="container mx-auto px-6">
     <h2 class="text-6xl text-center text-yellow-400 mb-12">My Origin Story!</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-      <div class="comic-panel-flip">
-        <div class="flip-card-inner">
-          <div class="flip-card-front bg-gray-800 p-6 text-center flex flex-col justify-center">
-            <h3 class="text-2xl text-blue-400">2020</h3>
-            <p class="mt-2 text-lg">10th @ Hongirana</p>
-          </div>
-          <div class="flip-card-back bg-yellow-400 p-6 text-center flex flex-col justify-center">
-            <p class="text-2xl font-bold text-black">88%</p>
-            <p class="text-black">A great start!</p>
-          </div>
+    <div class="flex flex-col md:flex-row items-center gap-12">
+      <div class="md:w-2/3">
+        <div class="comic-panel p-8">
+          <h3 class="text-3xl text-blue-400">Full-Stack Developer & AI Enthusiast</h3>
+          <p class="mt-4 text-lg text-gray-300">
+            I'm a final-year Computer Science student with a mission: to build creative and impactful web applications. My specialty lies in the **MERN stack** (MongoDB, Express.js, React.js, Node.js), but I'm also deeply passionate about the world of **Artificial Intelligence and Machine Learning**.
+          </p>
+          <p class="mt-4 text-lg text-gray-300">
+            I thrive on turning complex problems into intuitive, user-friendly experiences. From developing social learning platforms to AI-driven tools that predict startup success, I'm always looking for the next challenge to tackle. My goal is to leverage cutting-edge technology to create intelligent and meaningful tech solutions.
+          </p>
         </div>
       </div>
-      <div class="comic-panel-flip">
-        <div class="flip-card-inner">
-          <div class="flip-card-front bg-gray-800 p-6 text-center flex flex-col justify-center">
-            <h3 class="text-2xl text-blue-400">2022</h3>
-            <p class="mt-2 text-lg">PU @ NMKRV</p>
-          </div>
-          <div class="flip-card-back bg-green-400 p-6 text-center flex flex-col justify-center">
-            <p class="text-2xl font-bold text-black">88%</p>
-            <p class="text-black">Consistency is key!</p>
-          </div>
+      <div class="md:w-1/3 flex flex-col gap-8">
+        <div class="comic-panel p-6 text-center">
+          <h3 class="text-2xl text-yellow-400">B.E. in CSE</h3>
+          <p class="text-lg text-gray-300">Dr. Ambedkar Institute of Technology</p>
+          <p class="text-2xl font-bold text-white mt-2">8.3 CGPA</p>
         </div>
-      </div>
-       <div class="comic-panel-flip">
-        <div class="flip-card-inner">
-          <div class="flip-card-front bg-gray-800 p-6 text-center flex flex-col justify-center">
-            <h3 class="text-2xl text-blue-400">2026</h3>
-            <p class="mt-2 text-lg">B.E. @ AIT</p>
-          </div>
-          <div class="flip-card-back bg-blue-400 text-white p-6 text-center flex flex-col justify-center">
-            <p class="text-2xl font-bold">8.3 CGPA</p>
-            <p>Leveling up!</p>
-          </div>
-        </div>
-      </div>
-       <div class="comic-panel-flip">
-        <div class="flip-card-inner">
-          <div class="flip-card-front bg-gray-800 p-6 text-center flex flex-col justify-center">
-            <h3 class="text-2xl text-blue-400">2024</h3>
-            <p class="mt-2 text-lg">Intern @ SkillCraft</p>
-          </div>
-          <div class="flip-card-back bg-red-400 p-6 text-center flex flex-col justify-center">
-            <p class="text-2xl font-bold">React Dev</p>
-            <p>Real-world XP!</p>
-          </div>
-        </div>
-      </div>
-       <div class="comic-panel-flip">
-        <div class="flip-card-inner">
-          <div class="flip-card-front bg-gray-800 p-6 text-center flex flex-col justify-center">
-            <h3 class="text-2xl text-blue-400">2024</h3>
-            <p class="mt-2 text-lg">Hackathon @ RRIT</p>
-          </div>
-          <div class="flip-card-back bg-gray-600 text-white p-6 text-center flex flex-col justify-center">
-            <p class="text-2xl font-bold">Participant</p>
-            <p>Innovating!</p>
-          </div>
+        <div class="comic-panel p-6 text-center">
+          <h3 class="text-2xl text-yellow-400">Web Development Intern</h3>
+          <p class="text-lg text-gray-300">SkillCraft Technologies</p>
+          <p class="text-xl font-bold text-white mt-2">React Developer</p>
         </div>
       </div>
     </div>
@@ -233,6 +202,27 @@
     </div>
 </section>
 
+<section id="chess" class="py-20 bg-green-800 about-clipper section-container">
+  <div class="container mx-auto px-6 text-center">
+    <div class="comic-panel p-8 md:p-12 rotate-2">
+      <h2 class="text-5xl text-yellow-400">Fancy a Game of Chess?</h2>
+      <div class="flex flex-col md:flex-row items-center justify-center gap-8 mt-8">
+        <div class="text-left max-w-lg">
+          <p class="text-xl text-gray-300">
+            When I'm not coding, you can often find me enjoying a game on the 64 squares. It's a passion that helps sharpen my strategic thinking and problem-solving skills.
+          </p>
+          <p class="mt-4 text-xl text-gray-300">
+            I'm always happy to play a friendly match. If you'd like to connect, feel free to add me on Chess.com!
+          </p>
+          <a href="https://www.chess.com/member/Sumukhms" target="_blank" class="comic-button-small inline-block bg-yellow-400 text-black py-3 px-8 text-xl mt-8">Connect on Chess.com</a>
+        </div>
+        <div class="p-4 bg-gray-800 border-4 border-white rounded-lg shadow-lg">
+          <i class="fas fa-chess-knight text-9xl text-white"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <section id="resume" class="py-20 bg-red-800 about-clipper section-container">
     <div class="container mx-auto px-6 text-center">
@@ -262,23 +252,14 @@
       <p id="form-status" class="mt-4 text-lg hidden speech-bubble-mini"></p>
     </form>
 
-      <div class="mt-8 flex justify-center space-x-8 text-xl">
-        <a href="https://github.com/Sumukhms" target="_blank" class="text-blue-400 hover:underline">GitHub</a>
-        <a href="https://www.linkedin.com/in/sumukh-m-s-04a1aa25b/" target="_blank" class="text-blue-400 hover:underline">LinkedIn</a>
+      <div class="mt-8 flex justify-center space-x-8 text-4xl">
+        <a href="https://github.com/Sumukhms" target="_blank" class="text-blue-400 hover:text-yellow-400 transition-colors"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/sumukh-m-s-04a1aa25b/" target="_blank" class="text-blue-400 hover:text-yellow-400 transition-colors"><i class="fab fa-linkedin"></i></a>
       </div>
     </div>
   </footer>
 
   <div id="konami-egg" class="hidden">POW!</div>
-
-  <div id="tour-bot" class="hidden">
-      <div id="tour-bubble">Let's go!</div>
-      <div class="bot-body">
-          <div class="bot-eye"></div>
-          <div class="bot-eye"></div>
-      </div>
-  </div>
-
 
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script src="script.js"></script>

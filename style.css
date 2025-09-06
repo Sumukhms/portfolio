@@ -4,7 +4,7 @@
   color: #e2e8f0;
 }
 
-/* Ensure smooth scrolling for the tour */
+/* Ensure smooth scrolling */
 html {
     scroll-behavior: smooth;
 }
@@ -20,18 +20,22 @@ h1, h2, h3, .comic-button {
   letter-spacing: 2px;
 }
 
-/* Comic Panel Dark Theme */
+/* Comic Panel Dark Theme - UPDATED FOR SYMMETRY */
 .comic-panel {
   border: 4px solid #e2e8f0;
   border-radius: 8px;
   background-color: #2d3748;
   box-shadow: 8px 8px 0px #e2e8f0;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  /* Ensures all panels in a grid row have the same height */
+  height: 100%;
 }
-.dark .comic-panel:hover {
-  transform: translate(-4px, -4px);
-  box-shadow: 12px 12px 0px #e2e8f0;
+.dark #projects .comic-panel:hover {
+  transform: translate(-6px, -6px) rotate(2deg) scale(1.02);
+  box-shadow: 14px 14px 0px #ef4444; /* Red POW! color on hover */
+  border-color: #ef4444;
 }
+
 
 /* Comic Button Dark Theme */
 .comic-button-small {
@@ -52,14 +56,9 @@ h1, h2, h3, .comic-button {
   border: 3px solid #1a202c;
   border-radius: .4em;
 }
+/* Removed the ::after pseudo-element that created the arrow */
 .speech-bubble:after {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 15px solid transparent;
-  border-bottom-color: #1a202c;
+  content: none;
 }
 
 /* Dots Background Dark Theme */
@@ -78,10 +77,19 @@ h1, h2, h3, .comic-button {
   background-size: cover;
   animation: parallax 40s linear infinite;
 }
+
+/* NEW AVATAR STYLES */
+.avatar-container {
+    animation: float-bot 6s ease-in-out infinite;
+}
 .avatar:hover {
     transform: rotate(-5deg) scale(1.1);
     transition: transform 0.3s ease-in-out;
 }
+.pupil {
+    transition: transform 0.1s ease-out;
+}
+
 .comic-word {
   position: absolute;
   font-family: 'Bangers', cursive;
@@ -95,6 +103,13 @@ h1, h2, h3, .comic-button {
 .wow { top: 10%; left: -20%; animation-duration: 15s; }
 .zap { top: 50%; left: -20%; animation-duration: 18s; animation-delay: 5s; }
 .kapow { top: 80%; left: -20%; animation-duration: 22s; animation-delay: 10s; }
+
+/* NEW BOT FLOATING ANIMATION */
+@keyframes float-bot {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
 
 @keyframes float {
   from { transform: translateX(0vw) rotate(-10deg); }
@@ -217,79 +232,6 @@ h1, h2, h3, .comic-button {
 }
 
 
-/* --- Tour Bot --- */
-#tour-bot {
-    position: fixed;
-    z-index: 999;
-    transition: top 1s ease-in-out, left 1s ease-in-out;
-    width: 80px;
-    height: 80px;
-}
-.bot-body {
-    width: 80px;
-    height: 80px;
-    background-color: #f59e0b;
-    border-radius: 50%;
-    border: 4px solid #1a202c;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    animation: bot-hover 3s infinite ease-in-out;
-}
-.bot-eye {
-    width: 15px;
-    height: 15px;
-    background-color: #fff;
-    border-radius: 50%;
-    border: 2px solid #1a202c;
-    animation: bot-blink 5s infinite;
-}
-#tour-bubble {
-    position: absolute;
-    bottom: 90px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 250px;
-    padding: 15px;
-    background: #fff;
-    color: #1a202c;
-    border: 3px solid #1a202c;
-    border-radius: 10px;
-    font-size: 1rem;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.5s;
-    pointer-events: none;
-}
-#tour-bubble::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 10px solid transparent;
-    border-top-color: #1a202c;
-}
-#tour-bot.show-bubble #tour-bubble {
-    opacity: 1;
-}
-.highlight-section {
-    box-shadow: 0 0 0 5px #f59e0b;
-    border-radius: 12px;
-    transition: box-shadow 0.5s;
-}
-
-@keyframes bot-hover {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-@keyframes bot-blink {
-    0%, 90%, 100% { transform: scaleY(1); }
-    95% { transform: scaleY(0.1); }
-}
-
-
 /* --- Form --- */
 .form-input {
     width: 100%;
@@ -330,4 +272,16 @@ h1, h2, h3, .comic-button {
   border-top-color: #e2e8f0;
 }
 #form-status.success { background: #10B981; border-color: #059669; color: #fff; }
+#form-status.success:after { border-top-color: #059669; }
 #form-status.error { background: #EF4444; border-color: #DC2626; color: #fff; }
+#form-status.error:after { border-top-color: #DC2626; }
+
+/* Styling for the new chess icon */
+#chess .fa-chess-knight {
+  transform: rotate(-15deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+#chess .comic-panel:hover .fa-chess-knight {
+  transform: rotate(0deg) scale(1.1);
+}

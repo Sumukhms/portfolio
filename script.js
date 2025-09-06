@@ -13,21 +13,25 @@ document.addEventListener('DOMContentLoaded', () => {
       loader.style.display = 'none';
       projectsContainer.innerHTML = '';
 
-      const filteredRepos = repos.filter(repo =>
-        repo.name.toLowerCase() !== 'dsa' && repo.name.toLowerCase() !== 'html-portfolio'
-      );
+      const filteredRepos = repos.filter(repo => {
+        const repoName = repo.name.toLowerCase();
+        return repoName !== 'dsa' && repoName !== 'html-portfolio' && repoName !== 'portfolio';
+      });
 
       // Sort repos by most recent
       filteredRepos.sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
 
       filteredRepos.forEach((repo, index) => {
         const card = document.createElement('div');
-        card.className = 'comic-panel p-6 text-left animate-pop-in';
+        // Added 'flex' and 'flex-col' for symmetric styling
+        card.className = 'comic-panel p-6 text-left animate-pop-in flex flex-col';
         card.style.animationDelay = `${index * 150}ms`;
         card.innerHTML = `
-          <h3 class="text-2xl text-blue-400">${repo.name}</h3>
-          <p class="mt-2 text-gray-400 min-h-[6rem]">${repo.description || "No description provided."}</p>
-          <div class="mt-6 flex justify-between">
+          <div class="flex-grow">
+            <h3 class="text-2xl text-blue-400">${repo.name}</h3>
+            <p class="mt-2 text-gray-400">${repo.description || "No description provided."}</p>
+          </div>
+          <div class="mt-6 flex justify-between items-center">
             <a href="${repo.html_url}" target="_blank"
                class="comic-button-small bg-gray-700 text-white py-2 px-4">Code</a>
             ${repo.homepage ? `<a href="${repo.homepage}" target="_blank"
@@ -57,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     statusMsg.className = "mt-4 text-lg speech-bubble-mini";
     statusMsg.textContent = "⏳ Sending your message...";
-    statusMsg.classList.remove("hidden");
+    statusMsg.classList.remove("hidden", "success", "error");
 
     emailjs.sendForm('service_sdk6ck5', 'template_hiv8xn9', this)
       .then(() => {
@@ -112,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     type();
 
-
   // ===== Daily Comic Quote =====
     const quotes = [
         "Why do programmers prefer dark mode? Because light attracts bugs!",
@@ -157,67 +160,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ===== Tour Bot Logic =====
-    const tourBot = document.getElementById('tour-bot');
-    const tourBubble = document.getElementById('tour-bubble');
-    const startTourBtn = document.getElementById('start-tour-btn');
+    // ===== NEW: Interactive Avatar Logic =====
+    const pupilLeft = document.getElementById('pupil-left');
+    const pupilRight = document.getElementById('pupil-right');
+    const eyeLeft = document.getElementById('eye-left');
+    const eyeRight = document.getElementById('eye-right');
 
-    const tourStops = [
-        { selector: '#about', dialogue: 'Hi! I am your guide. Let me show you Sumukh\'s origin story.' },
-        { selector: '#projects', dialogue: 'KAPOW! Here are all the awesome projects he has built.' },
-        { selector: '#skills', dialogue: 'These are his superpowers... I mean, his skills.' },
-        { selector: '#certifications', dialogue: 'He has also collected these powerful artifacts, also known as certificates!' },
-        { selector: '#resume', dialogue: 'Want the full story? You can download his secret file right here.' },
-        { selector: '#contact', dialogue: 'Got a mission? Let\'s team up! Contact him here. Thanks for visiting!' }
-    ];
+    document.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
 
-    let currentStop = 0;
-    let isTourActive = false;
+        // Function to move a pupil based on mouse position
+        const movePupil = (eye, pupil) => {
+            const eyeRect = eye.getBoundingClientRect();
+            const eyeCenterX = eyeRect.left + eyeRect.width / 2;
+            const eyeCenterY = eyeRect.top + eyeRect.height / 2;
+            
+            const deltaX = clientX - eyeCenterX;
+            const deltaY = clientY - eyeCenterY;
+            
+            const angle = Math.atan2(deltaY, deltaX);
+            
+            // Max distance the pupil can move from the center
+            const maxRadius = eyeRect.width / 4;
+            
+            const moveX = Math.cos(angle) * maxRadius;
+            const moveY = Math.sin(angle) * maxRadius;
 
-    function startTour() {
-        if (isTourActive) return;
-        isTourActive = true;
-        startTourBtn.style.display = 'none';
-        tourBot.classList.remove('hidden');
-        moveToStop(0);
-    }
+            pupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        };
 
-    function moveToStop(index) {
-        if (index >= tourStops.length) {
-            endTour();
-            return;
-        }
-
-        currentStop = index;
-        const stop = tourStops[index];
-        const targetElement = document.querySelector(stop.selector);
-
-        // Remove previous highlight
-        document.querySelectorAll('.highlight-section').forEach(el => el.classList.remove('highlight-section'));
-
-        // Scroll to and highlight the new section
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        targetElement.classList.add('highlight-section');
-
-        // Position bot and update dialogue
-        const rect = targetElement.getBoundingClientRect();
-        tourBot.style.top = `${window.scrollY + rect.top + (rect.height / 2) - 40}px`;
-        tourBot.style.left = '20px'; // Keep it on the left
-        
-        tourBubble.textContent = stop.dialogue;
-        tourBot.classList.add('show-bubble');
-
-        setTimeout(() => {
-            moveToStop(index + 1);
-        }, 7000); // 7 seconds per stop
-    }
-
-    function endTour() {
-        tourBot.classList.add('hidden');
-        document.querySelectorAll('.highlight-section').forEach(el => el.classList.remove('highlight-section'));
-        isTourActive = false;
-        // The start button will reappear on page reload
-    }
-
-    startTourBtn.addEventListener('click', startTour);
+        movePupil(eyeLeft, pupilLeft);
+        movePupil(eyeRight, pupilRight);
+    });
 });
