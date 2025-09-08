@@ -18,12 +18,37 @@ document.addEventListener('DOMContentLoaded', () => {
         return repoName !== 'dsa' && repoName !== 'html-portfolio' && repoName !== 'portfolio';
       });
 
-      // Sort repos by most recent
-      filteredRepos.sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+      // ========== CORRECTED SORTING LOGIC ==========
+      // The names in this array now EXACTLY match your repository names on GitHub.
+      const priorityProjects = [
+        'InvestIQ',
+        'edugram',
+        'echomood',
+        'newsmonkey', // Corrected from 'NewsMonkey'
+        'weather',  // Corrected from 'Weather'
+        'textutils',
+        
+      ];
+
+      filteredRepos.sort((a, b) => {
+        const aIndex = priorityProjects.indexOf(a.name);
+        const bIndex = priorityProjects.indexOf(b.name);
+
+        if (aIndex > -1 && bIndex > -1) {
+          return aIndex - bIndex;
+        }
+        if (aIndex > -1) {
+          return -1;
+        }
+        if (bIndex > -1) {
+          return 1;
+        }
+        return new Date(b.pushed_at) - new Date(a.pushed_at);
+      });
+      // ===========================================
 
       filteredRepos.forEach((repo, index) => {
         const card = document.createElement('div');
-        // Added 'flex' and 'flex-col' for symmetric styling
         card.className = 'comic-panel p-6 text-left animate-pop-in flex flex-col';
         card.style.animationDelay = `${index * 150}ms`;
         card.innerHTML = `
@@ -99,17 +124,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         typingText.textContent = displayText;
-        typingText.style.borderRight = '3px solid #a0aec0'; // Keep cursor visible
+        typingText.style.borderRight = '3px solid #a0aec0';
 
         let typeSpeed = isDeleting ? 100 : 200;
 
         if (!isDeleting && charIndex === currentTagline.length) {
-            typeSpeed = 2000; // Pause at the end
+            typeSpeed = 2000;
             isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             taglineIndex = (taglineIndex + 1) % taglines.length;
-            typeSpeed = 500; // Pause before typing new line
+            typeSpeed = 500;
         }
 
         setTimeout(type, typeSpeed);
@@ -160,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ===== NEW: Interactive Avatar Logic =====
+    // ===== Interactive Avatar Logic =====
     const pupilLeft = document.getElementById('pupil-left');
     const pupilRight = document.getElementById('pupil-right');
     const eyeLeft = document.getElementById('eye-left');
@@ -169,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', (e) => {
         const { clientX, clientY } = e;
 
-        // Function to move a pupil based on mouse position
         const movePupil = (eye, pupil) => {
             const eyeRect = eye.getBoundingClientRect();
             const eyeCenterX = eyeRect.left + eyeRect.width / 2;
@@ -180,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const angle = Math.atan2(deltaY, deltaX);
             
-            // Max distance the pupil can move from the center
             const maxRadius = eyeRect.width / 4;
             
             const moveX = Math.cos(angle) * maxRadius;
