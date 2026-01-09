@@ -13,10 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
       loader.style.display = 'none';
       projectsContainer.innerHTML = '';
 
+      // Repositories that should NEVER appear on your portfolio
+      const hiddenRepos = [
+        "dsa",
+        "html-portfolio",
+        "portfolio",
+        "sumukhms",
+        "investiq-dummy",
+        "scalartech_deforge"
+      ];
+
+      // Filter out hidden repos
       const filteredRepos = repos.filter(repo => {
-        const repoName = repo.name.toLowerCase();
-        return repoName !== 'dsa' && repoName !== 'html-portfolio' && repoName !== 'portfolio';
+        return !hiddenRepos.includes(repo.name.toLowerCase());
       });
+
 
       // ========== CORRECTED SORTING LOGIC ==========
       // The names in this array now EXACTLY match your repository names on GitHub.
