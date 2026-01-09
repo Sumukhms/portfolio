@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "dsa",
         "html-portfolio",
         "portfolio",
-        "sumukhms",
+        "Sumukhms",
         "investiq-dummy",
         "scalartech_deforge"
       ];
